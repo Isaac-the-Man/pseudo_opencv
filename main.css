@@ -1,0 +1,94 @@
+body {
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+}
+.content {
+  width: 50%;
+}
+@media only screen and (max-width: 600px) {
+  .content {
+    width: 90%;
+  }
+}
+.heading {
+  text-align: center;
+  margin-top: 80px;
+  margin-bottom: 40px;
+  font-size: 150%;
+}
+.heading h1 {
+  font-size: 250%;
+}
+.sharebar {
+  color: white;
+  background-color: #272822;
+  align-self: stretch;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+}
+.sharebar * {
+  margin: 0;
+  padding: 0;
+}
+.sharebar a {
+  color: white;
+}
+.topbar {
+  justify-content: center;
+}
+.bottombar {
+  margin-top: 40px;
+  justify-content: space-between;
+}
+img {
+  max-width: 100%;
+  max-height: auto;
+  margin-bottom: 16px;
+}
+hr {
+  width: 100%;
+  border-top: 1px solid black;
+  margin: 40px 0 40px 0;
+}
+pre {
+  margin-bottom: 16px !important;
+}
+.subtitle {
+  margin-top: 21px;
+  margin-bottom: 8px;
+}
+.partitle {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+.reference ul {
+  margin: 8px 0px;
+}
+.reference ul li {
+  margin: 8px 0px;
+}
+
+/* tools */
+.display {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-areas:
+  "orig-title result-title"
+  "original result";
+}
+.display-original {
+  grid-area: original;
+}
+.display-result {
+  grid-area: result;
+}
+.control-panel {
+  margin: 16px;
+}
+.caption {
+  margin-bottom: 16px;
+}

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <base href="../../">
+    <link rel="stylesheet" href="prism.css">
+    <link rel="stylesheet" href="jquery-ui.min.css">
+    <link rel="stylesheet" href="custom-slider.css">
+    <link rel="stylesheet" href="gui.css">
+    <link rel="stylesheet" href="main.css">
+
+    <title>Pseudo OpenCV</title>
+
+  </head>
+  <body class="line-numbers language-python">
+    <!-- Sharing Links -->
+    <div class="sharebar topbar">
+      <a href="/">Home</a>
+    </div>
+    <!-- Content of post -->
+    <div class="content">
+
+      <!-- Heading Text -->
+      <div class="heading">
+        <h1>Canny Edge Detector</h1>
+        <p>state-of-the-art paramter tuning</p>
+      </div>
+
+      <!-- Display -->
+      <div class="display">
+        <div class="display-original-title">
+          <b>Original</b>
+        </div>
+        <div class="display-result-title">
+          <b>Result</b>
+        </div>
+        <img id="inputImg" src="default.png" alt="source image">
+        <canvas id="outputCanvas"></canvas>
+      </div>
+
+      <!-- upload file -->
+      <div class="caption">
+        <input type="file" id="fileInput" name="file" accept="image/*">
+      </div>
+
+      <!-- Parameters -->
+      <h3 class="subtitle">Parameters</h3>
+      <div class="tab">
+        <button class="tablinks" onclick="openCity(event, 'thresholds')" id="defaultOpen">Thresholds</button>
+        <button class="tablinks" onclick="openCity(event, 'aperturesize')">Aperture</button>
+        <button class="tablinks" onclick="openCity(event, 'l2gradient')">L2 Gradient</button>
+      </div>
+      <!-- Tab pages -->
+      <div id="thresholds" class="tabcontent">
+        <h3>Thresholds</h3>
+        <p>
+          The thesholds of the hysteresis process in the Canny algorith.
+          The larger of the two is for finding strong edges, and the smaller one is for
+          edge linkage.
+        </p>
+        <!-- toggle btns -->
+        <p class="partitle"><b>Threshold1</b></p>
+        <div id="s-slider1"></div>
+        <p class="partitle"><b>Threshold2</b></p>
+        <div id="s-slider2"></div>
+      </div>
+      <div id="aperturesize" class="tabcontent">
+        <h3>Aperture Size (optional)</h3>
+        <p>
+          Aperture size of the Sobel() operator. The default value is three,
+          and only value <code>[ 3, 5, 7 ]</code> are allowed.
+        </p>
+        <div id="s-slider3"></div>
+      </div>
+      <div id="l2gradient" class="tabcontent">
+        <h3>L2 Gradient (optional)</h3>
+        <p>
+          Whether or not to use the more accurate L2 norm (slower) to calculate gradient.
+          The default value is <code>False</code>.
+        </p>
+        <div id="toggle1"></div>
+      </div>
+
+      <!-- div code display -->
+      <h3 class="subtitle">Code</h3>
+      <div id="codePython"></div>
+
+      <!-- reference -->
+      <div class="reference">
+        <h3 class="subtitle">Reference</h3>
+        <ul>
+          <li><a href="https://docs.opencv.org/3.4.0/dd/d1a/group__imgproc__feature.html#ga04723e007ed888ddf11d9ba04e2232de" target="_blank">cv2.Canny</a></li>
+        </ul>
+      </div>
+
+      <hr>
+
+      <p>
+        <i>
+          *Disclaimer*: This site is not in any way associated with the OpenCV organization.
+          Visit <a href="https://opencv.org/">OpenCV.org</a> for an updated documentation for the
+          latest functions.
+        </i>
+      </p>
+
+      <p>
+        <i>
+          This site is built on the sheer annoyance and repetitive frustration the author experienced while
+          tuning parameters on OpenCV. It is casually maintained in my spare time. You can DM me on
+          Github for any feature suggestions.
+        </i>
+      </p>
+
+    </div>
+
+    <!-- footer -->
+    <div class="sharebar bottombar">
+      <p>© 2020~ Yu-Kai Wang</p>
+      <div class="social">
+        <a href="#">@Github</a>
+      </div>
+    </div>
+
+  </body>
+  <script async src="opencv-3.4.js" type="text/javascript" onload="onOpenCVReady();"></script>
+  <script src="utilities/canny/process.js" type="text/javascript"></script>
+  <script src="clipboard.min.js"></script>
+  <script src="preCode.js" type="text/javascript"></script>
+  <script src="prism.js" type="text/javascript"></script>
+  <script src="prism-copy-to-clipboard.js" type="text/javascript"></script>
+  <!-- include the jQuery and jQuery UI scripts -->
+  <script src="jquery.js"></script>
+  <script src="jquery-ui.min.js"></script>
+  <script src="custom-slider.js" type="text/javascript"></script>
+  <script src="gui.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    initToggle('toggle1');
+    initSingleSlider('s-slider1', 0, 255);
+    initSingleSlider('s-slider2', 0, 255);
+    initSingleSlider('s-slider3', 3, 7, { default: 3, step: 2});
+  </script>
+</html>
