@@ -26,7 +26,7 @@
 
       <!-- Heading Text -->
       <div class="heading">
-        <h1>Image Thresholding</h1>
+        <h1>Gaussian Blur</h1>
         <p>state-of-the-art paramter tuning</p>
       </div>
 
@@ -50,25 +50,40 @@
       <!-- Parameters -->
       <h3 class="subtitle">Parameters</h3>
       <div class="tab">
-        <button class="tablinks" onclick="openTab(event, 'thresholds')" id="defaultOpen">Thresholds</button>
-        <button class="tablinks" onclick="openTab(event, 'aperturesize')">Type</button>
+        <button class="tablinks" onclick="openTab(event, 'kernel')" id="defaultOpen">Kernel</button>
+        <button class="tablinks" onclick="openTab(event, 'sigma')">Sigma</button>
+        <button class="tablinks" onclick="openTab(event, 'border')">Border Type</button>
       </div>
       <!-- Tab pages -->
-      <div id="thresholds" class="tabcontent">
-        <h3>Thresholds</h3>
+      <div id="kernel" class="tabcontent">
+        <h3>Kernel</h3>
         <p>
-          The minimum and maximum thresholds of the image, resulting in a binary image of the given range.
-          Depending on the type of algorithm selected (see the 'type' tab), the maxium value may be unused.
+          The width and height of the Gaussian Kernel. Must be a positive odd number. Here I limit the kernel size between 3 ~ 21 since large kernels are unlikely.
+          Typically we set the same value for Kernel X and Kernel Y.
         </p>
         <!-- toggle btns -->
-        <div id="r-slider"></div>
+        <p class="partitle"><b>Kernel X</b></p>
+        <div id="s-slider1"></div>
+        <p class="partitle"><b>Kernel Y</b></p>
+        <div id="s-slider2"></div>
       </div>
-      <div id="aperturesize" class="tabcontent">
-        <h3>Type</h3>
+      <div id="sigma" class="tabcontent">
+        <h3>Sigma</h3>
         <p>
-          Type of algorithm use to calculate the threshold. Check out the <a href="https://docs.opencv.org/3.4.0/d7/d4d/tutorial_py_thresholding.html" target="_blank">documentation</a>
-          for further information on each type. Speical algorithms such as <code>THRESH_OTSU</code> and <code>THRESH_TRIANGLE</code> are not included here since they are
-          rarely used.
+          Standard deviation of the Gaussian Kernel, each referring to the X and Y component.
+          Set Sigma X to <code>0</code> to calculate from kernel size. Set Sigma Y to <code>0</code> (default)
+          to make it the same value as Sigma X.
+        </p>
+        <p class="partitle"><b>Sigma X</b></p>
+        <div id="s-slider3"></div>
+        <p class="partitle"><b>Sigma Y</b></p>
+        <div id="s-slider4"></div>
+      </div>
+      <div id="border" class="tabcontent">
+        <h3>Border Type</h3>
+        <p>
+          The type of padding to use on border. Check out the <a href="https://docs.opencv.org/3.4.0/d2/de8/group__core__array.html#ga209f2f4869e304c82d07739337eae7c5" target="_blank">documentation</a>
+          for further information on each border type. The default value is <code>BORDER_DEFAULT</code>.
         </p>
         <div id="radio"></div>
       </div>
@@ -81,8 +96,8 @@
       <div class="reference">
         <h3 class="subtitle">Reference</h3>
         <ul>
-          <li><a href="https://docs.opencv.org/3.4.0/d7/d1b/group__imgproc__misc.html#gae8a4a146d1ca78c626a53577199e9c57" target="_blank">cv2.threshold</a></li>
-          <li><a href="https://docs.opencv.org/3.4.0/d7/d4d/tutorial_py_thresholding.html" target="_blank">Image Thresholding</a></li>
+          <li><a href="https://docs.opencv.org/3.4.0/d4/d86/group__imgproc__filter.html#gaabe8c836e97159a9193fb0b11ac52cf1" target="_blank">cv2.GaussianBlur</a></li>
+          <li><a href="https://docs.opencv.org/3.4.0/d4/d13/tutorial_py_filtering.html" target="_blank">Image Smoothing</a></li>
         </ul>
       </div>
 
@@ -116,7 +131,7 @@
 
   </body>
   <script async src="opencv-3.4.js" type="text/javascript" onload="onOpenCVReady();"></script>
-  <script src="utilities/threshold/process.js" type="text/javascript"></script>
+  <script src="utilities/gaussianblur/process.js" type="text/javascript"></script>
   <script src="clipboard.min.js"></script>
   <script src="preCode.js" type="text/javascript"></script>
   <script src="prism.js" type="text/javascript"></script>
@@ -127,14 +142,16 @@
   <script src="custom-slider.js" type="text/javascript"></script>
   <script src="gui.js" type="text/javascript"></script>
   <script type="text/javascript">
-    initRangeSlider('r-slider', 0, 255);
+    initSingleSlider('s-slider1', 3, 21, { default: 3, step: 2 });
+    initSingleSlider('s-slider2', 3, 21, { default: 3, step: 2 });
+    initSingleSlider('s-slider3', 0, 21);
+    initSingleSlider('s-slider4', 0, 21);
     initRadioGroup('radio', 'radio-type', [
-      ['THRESH_BINARY', 'THRESH_BINARY'],
-      ['THRESH_BINARY_INV', 'THRESH_BINARY_INV'],
-      ['THRESH_TRUNC', 'THRESH_TRUNC'],
-      ['THRESH_TOZERO', 'THRESH_TOZERO'],
-      ['THRESH_TOZERO_INV', 'THRESH_TOZERO_INV']
+      ['BORDER_DEFAULT', 'BORDER_DEFAULT'],
+      ['BORDER_CONSTANT', 'BORDER_CONSTANT'],
+      ['BORDER_REPLICATE', 'BORDER_REPLICATE'],
+      ['BORDER_REFLECT', 'BORDER_REFLECT'],
+      ['BORDER_WRAP', 'BORDER_WRAP']
     ]);
-
   </script>
 </html>
