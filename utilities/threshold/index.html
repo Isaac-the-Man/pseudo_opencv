@@ -26,7 +26,7 @@
 
       <!-- Heading Text -->
       <div class="heading">
-        <h1>Canny Edge Detector</h1>
+        <h1>Image Thresholding</h1>
         <p>state-of-the-art paramter tuning</p>
       </div>
 
@@ -51,38 +51,26 @@
       <h3 class="subtitle">Parameters</h3>
       <div class="tab">
         <button class="tablinks" onclick="openTab(event, 'thresholds')" id="defaultOpen">Thresholds</button>
-        <button class="tablinks" onclick="openTab(event, 'aperturesize')">Aperture</button>
-        <button class="tablinks" onclick="openTab(event, 'l2gradient')">L2 Gradient</button>
+        <button class="tablinks" onclick="openTab(event, 'aperturesize')">Type</button>
       </div>
       <!-- Tab pages -->
       <div id="thresholds" class="tabcontent">
         <h3>Thresholds</h3>
         <p>
-          The thesholds of the hysteresis process in the Canny algorith.
-          The larger of the two is for finding strong edges, and the smaller one is for
-          edge linkage.
+          The minimum and maximum thresholds of the image, resulting in a binary image of the given range.
+          Depending on the type of algorithm selected (see the 'type' tab), the maxium value may be unused.
         </p>
         <!-- toggle btns -->
-        <p class="partitle"><b>Threshold1</b></p>
-        <div id="s-slider1"></div>
-        <p class="partitle"><b>Threshold2</b></p>
-        <div id="s-slider2"></div>
+        <div id="r-slider"></div>
       </div>
       <div id="aperturesize" class="tabcontent">
-        <h3>Aperture Size (optional)</h3>
+        <h3>Type</h3>
         <p>
-          Aperture size of the Sobel() operator. The default value is <code>3</code>,
-          and only value <code>[ 3, 5, 7 ]</code> are allowed.
+          Type of algorithm use to calculate the threshold. Check out the <a href="https://docs.opencv.org/3.4.0/d7/d4d/tutorial_py_thresholding.html">documentation</a>
+          for further information on each type. Speical algorithms such as <code>THRESH_OTSU</code> and <code>THRESH_TRIANGLE</code> are no included here since they are
+          rarely used.
         </p>
-        <div id="s-slider3"></div>
-      </div>
-      <div id="l2gradient" class="tabcontent">
-        <h3>L2 Gradient (optional)</h3>
-        <p>
-          Whether or not to use the more accurate L2 norm (slower) to calculate gradient.
-          The default value is <code>False</code>.
-        </p>
-        <div id="toggle1"></div>
+        <div id="radio"></div>
       </div>
 
       <!-- div code display -->
@@ -93,7 +81,8 @@
       <div class="reference">
         <h3 class="subtitle">Reference</h3>
         <ul>
-          <li><a href="https://docs.opencv.org/3.4.0/dd/d1a/group__imgproc__feature.html#ga04723e007ed888ddf11d9ba04e2232de" target="_blank">cv2.Canny</a></li>
+          <li><a href="https://docs.opencv.org/3.4.0/d7/d1b/group__imgproc__misc.html#gae8a4a146d1ca78c626a53577199e9c57" target="_blank">cv2.threshold</a></li>
+          <li><a href="https://docs.opencv.org/3.4.0/d7/d4d/tutorial_py_thresholding.html" target="_blank">Image Thresholding</a></li>
         </ul>
       </div>
 
@@ -127,7 +116,7 @@
 
   </body>
   <script async src="opencv-3.4.js" type="text/javascript" onload="onOpenCVReady();"></script>
-  <script src="utilities/canny/process.js" type="text/javascript"></script>
+  <script src="utilities/threshold/process.js" type="text/javascript"></script>
   <script src="clipboard.min.js"></script>
   <script src="preCode.js" type="text/javascript"></script>
   <script src="prism.js" type="text/javascript"></script>
@@ -138,9 +127,14 @@
   <script src="custom-slider.js" type="text/javascript"></script>
   <script src="gui.js" type="text/javascript"></script>
   <script type="text/javascript">
-    initToggle('toggle1');
-    initSingleSlider('s-slider1', 0, 255);
-    initSingleSlider('s-slider2', 0, 255);
-    initSingleSlider('s-slider3', 3, 7, { default: 3, step: 2});
+    initRangeSlider('r-slider', 0, 255);
+    initRadioGroup('radio', 'radio-type', [
+      ['THRESH_BINARY', 'THRESH_BINARY'],
+      ['THRESH_BINARY_INV', 'THRESH_BINARY_INV'],
+      ['THRESH_TRUNC', 'THRESH_TRUNC'],
+      ['THRESH_TOZERO', 'THRESH_TOZERO'],
+      ['THRESH_TOZERO_INV', 'THRESH_TOZERO_INV']
+    ]);
+
   </script>
 </html>

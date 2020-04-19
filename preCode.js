@@ -7,7 +7,6 @@
 
 function preCode(selector) {
 	var els = Array.prototype.slice.call(document.querySelectorAll(selector), 0);
-	console.log(els);
 	els.forEach(function(el) {
 		var txt = el.textContent
 			.replace(/^[\r\n]+/, "")	// strip leading newline
