@@ -32,7 +32,7 @@
 
       <!-- Heading Text -->
       <div class="heading">
-        <h1>Image Thresholding</h1>
+        <h1>HSV Color Mask</h1>
         <p>state-of-the-art paramter tuning</p>
       </div>
 
@@ -56,27 +56,40 @@
       <!-- Parameters -->
       <h3 class="subtitle">Parameters</h3>
       <div class="tab">
-        <button class="tablinks" onclick="openTab(event, 'thresholds')" id="defaultOpen">Thresholds</button>
-        <button class="tablinks" onclick="openTab(event, 'aperturesize')">Type</button>
+        <button class="tablinks" onclick="openTab(event, 'mask1')" id="defaultOpen">Mask 1</button>
+        <button class="tablinks" onclick="openTab(event, 'mask2')">Mask 2</button>
       </div>
       <!-- Tab pages -->
-      <div id="thresholds" class="tabcontent">
-        <h3>Thresholds</h3>
+      <div id="mask1" class="tabcontent">
+        <h3>Mask 1</h3>
         <p>
-          The minimum and maximum thresholds of the image, resulting in a binary image of the given range.
-          Depending on the type of algorithm selected (see the 'type' tab), the maxium value may be unused.
+          The selected range of the HSV color space. It is seperated into 3 channels:
+          Hue (0 ~ 180) Saturation (0 ~ 255) Value (0 ~ 255). An additional mask (see tab Mask2) can be enabled to select
+          values accross the HSV color circle (like red).
         </p>
-        <!-- toggle btns -->
-        <div id="r-slider"></div>
+        <p class="partitle"><b>Hue</b></p>
+        <div id="r-slider-h1"></div>
+        <p class="partitle"><b>Saturation</b></p>
+        <div id="r-slider-s1"></div>
+        <p class="partitle"><b>Value</b></p>
+        <div id="r-slider-v1"></div>
       </div>
-      <div id="aperturesize" class="tabcontent">
-        <h3>Type</h3>
+      <div id="mask2" class="tabcontent">
+        <h3>Mask 2</h3>
         <p>
-          Type of algorithm use to calculate the threshold. Check out the <a href="https://docs.opencv.org/3.4.0/d7/d4d/tutorial_py_thresholding.html" target="_blank">documentation</a>
-          for further information on each type. Speical algorithms such as <code>THRESH_OTSU</code> and <code>THRESH_TRIANGLE</code> are not included here since they are
-          rarely used.
+          The second color mask in addition to the first mask. It is for selecting colors accross the HSV color circle (like red)
+          or just simply two patches of seperated colors. By default only one mask is used.
         </p>
-        <div id="radio"></div>
+        <p class="partitle"><b>Enable</b></p>
+        <div id="toggle"></div>
+        <div id="enabled" class="invisible">
+          <p class="partitle"><b>Hue</b></p>
+          <div id="r-slider-h2"></div>
+          <p class="partitle"><b>Saturation</b></p>
+          <div id="r-slider-s2"></div>
+          <p class="partitle"><b>Value</b></p>
+          <div id="r-slider-v2"></div>
+        </div>
       </div>
 
       <!-- div code display -->
@@ -122,7 +135,7 @@
 
   </body>
   <script async src="opencv-3.4.js" type="text/javascript" onload="onOpenCVReady();"></script>
-  <script src="utilities/threshold/process.js" type="text/javascript"></script>
+  <script src="utilities/hsvcolormask/process.js" type="text/javascript"></script>
   <script src="clipboard.min.js"></script>
   <script src="preCode.js" type="text/javascript"></script>
   <script src="prism.js" type="text/javascript"></script>
@@ -133,14 +146,12 @@
   <script src="custom-slider.js" type="text/javascript"></script>
   <script src="gui.js" type="text/javascript"></script>
   <script type="text/javascript">
-    initRangeSlider('r-slider', 0, 255);
-    initRadioGroup('radio', 'radio-type', [
-      ['THRESH_BINARY', 'THRESH_BINARY'],
-      ['THRESH_BINARY_INV', 'THRESH_BINARY_INV'],
-      ['THRESH_TRUNC', 'THRESH_TRUNC'],
-      ['THRESH_TOZERO', 'THRESH_TOZERO'],
-      ['THRESH_TOZERO_INV', 'THRESH_TOZERO_INV']
-    ]);
-
+    initRangeSlider('r-slider-h1', 0, 180);
+    initRangeSlider('r-slider-s1', 0, 255);
+    initRangeSlider('r-slider-v1', 0, 255);
+    initRangeSlider('r-slider-h2', 0, 180);
+    initRangeSlider('r-slider-s2', 0, 255);
+    initRangeSlider('r-slider-v2', 0, 255);
+    initToggle('toggle');
   </script>
 </html>

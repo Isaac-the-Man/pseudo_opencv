@@ -71,6 +71,9 @@ pre {
 .reference ul li {
   margin: 8px 0px;
 }
+.invisible {
+  display: none;
+}
 
 /* tools */
 .display {
