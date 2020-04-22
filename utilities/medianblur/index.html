@@ -32,7 +32,7 @@
 
       <!-- Heading Text -->
       <div class="heading">
-        <h1>Adaptive Image Thresholding</h1>
+        <h1>Median Blur</h1>
         <p>state-of-the-art paramter tuning</p>
       </div>
 
@@ -56,52 +56,16 @@
       <!-- Parameters -->
       <h3 class="subtitle">Parameters</h3>
       <div class="tab">
-        <button class="tablinks" onclick="openTab(event, 'max')" id="defaultOpen">Max Value</button>
-        <button class="tablinks" onclick="openTab(event, 'adaptive')">Adaptive Method</button>
-        <button class="tablinks" onclick="openTab(event, 'type')">Type</button>
-        <button class="tablinks" onclick="openTab(event, 'block')">Block Size</button>
-        <button class="tablinks" onclick="openTab(event, 'constant')">Constant</button>
+        <button class="tablinks" onclick="openTab(event, 'kernel')" id="defaultOpen">Kernel</button>
       </div>
       <!-- Tab pages -->
-      <div id="max" class="tabcontent">
-        <h3>Max Value</h3>
+      <div id="kernel" class="tabcontent">
+        <h3>Kernel</h3>
         <p>
-          Upper limit of the thershold process.
-        </p>
-        <div id="s-slider1"></div>
-      </div>
-      <div id="adaptive" class="tabcontent">
-        <h3>Adaptive Method</h3>
-        <p>
-          The adaptive algorithm to use. Check out the <a href="https://docs.opencv.org/3.4/d7/d1b/group__imgproc__misc.html#gaa42a3e6ef26247da787bf34030ed772c">Adaptive Threshold Type</a>
-          for more detail explanation.
+          The kernel size of the median filter. Must be a positive and odd integer.
         </p>
         <!-- toggle btns -->
-        <div id="radio1"></div>
-      </div>
-      <div id="type" class="tabcontent">
-        <h3>Type</h3>
-        <p>
-          Type of algorithm use to calculate the threshold. Check out the <a href="https://docs.opencv.org/3.4.0/d7/d4d/tutorial_py_thresholding.html" target="_blank">documentation</a>
-          for further information on each type. Unlike the normal <code>cv2.threshold()</code>,
-          only limited amount of threshold type is supported.
-        </p>
-        <div id="radio2"></div>
-      </div>
-      <div id="block" class="tabcontent">
-        <h3>Block Size</h3>
-        <p>
-          The kernel size of the adaptive algorithm. Must be a positive odd number.
-        </p>
-        <div id="s-slider2"></div>
-      </div>
-      <div id="constant" class="tabcontent">
-        <h3>Constant</h3>
-        <p>
-          The constant deducted from the weighted mean of the adaptive algorithm.
-          It's usually positive but negative number is also supported.
-        </p>
-        <div id="s-slider3"></div>
+        <div id="s-slider"></div>
       </div>
 
       <!-- div code display -->
@@ -112,9 +76,8 @@
       <div class="reference">
         <h3 class="subtitle">Reference</h3>
         <ul>
-          <li><a href="https://docs.opencv.org/3.4/d7/d1b/group__imgproc__misc.html#ga72b913f352e4a1b1b397736707afcde3" target="_blank">cv2.adaptiveThreshold</a></li>
-          <li><a href="https://docs.opencv.org/3.4/d7/d4d/tutorial_py_thresholding.html" target="_blank">Image Thresholding</a></li>
-          <li><a href="https://docs.opencv.org/3.4/d7/d1b/group__imgproc__misc.html#gaa42a3e6ef26247da787bf34030ed772c">Adaptive Type</a></li>
+          <li><a href="https://docs.opencv.org/3.4.0/d4/d86/group__imgproc__filter.html#ga564869aa33e58769b4469101aac458f9" target="_blank">cv2.medianBlur</a></li>
+          <li><a href="https://docs.opencv.org/3.4.0/d4/d13/tutorial_py_filtering.html" target="_blank">Smoothing Images</a></li>
         </ul>
       </div>
 
@@ -148,7 +111,7 @@
 
   </body>
   <script async src="opencv-3.4.js" type="text/javascript" onload="onOpenCVReady();"></script>
-  <script src="utilities/adaptthreshold/process.js" type="text/javascript"></script>
+  <script src="utilities/medianblur/process.js" type="text/javascript"></script>
   <script src="clipboard.min.js"></script>
   <script src="preCode.js" type="text/javascript"></script>
   <script src="prism.js" type="text/javascript"></script>
@@ -160,16 +123,6 @@
   <script src="custom-slider.js" type="text/javascript"></script>
   <script src="gui.js" type="text/javascript"></script>
   <script type="text/javascript">
-    initSingleSlider('s-slider1', 0, 255, { default: 255 });
-    initSingleSlider('s-slider2', 3, 21, { default: 3, step: 2 });
-    initSingleSlider('s-slider3', 0, 21, { default: 0 });
-    initRadioGroup('radio1', 'radio-type1', [
-      ['ADAPTIVE_THRESH_MEAN_C', 'ADAPTIVE_THRESH_MEAN_C'],
-      ['ADAPTIVE_THRESH_GAUSSIAN_C ', 'ADAPTIVE_THRESH_GAUSSIAN_C ']
-    ]);
-    initRadioGroup('radio2', 'radio-type2', [
-      ['THRESH_BINARY', 'THRESH_BINARY'],
-      ['THRESH_BINARY_INV', 'THRESH_BINARY_INV']
-    ]);
+    initSingleSlider('s-slider', 3, 21, { default: 3, step: 2 });
   </script>
 </html>
