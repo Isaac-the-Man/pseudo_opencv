@@ -43,6 +43,7 @@ function onEventChange() {
     src = cv2.imread('image.jpg');
     blur = cv2.medianBlur(src, ${options.ksize})
     cv2.imshow('output', blur)
+    cv2.waitKey(0)
     cv2.destroyAllWindows()
     `
   )

@@ -49,6 +49,7 @@ function onEventChange() {
     gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
     thresh = cv2.threshold(gray, ${options.maxval}, cv2.${options.adaptive},cv2.${options.type}, ${options.block}, ${options.constant})
     cv2.imshow('output', thresh)
+    cv2.waitKey(0)
     cv2.destroyAllWindows()
     `
   )

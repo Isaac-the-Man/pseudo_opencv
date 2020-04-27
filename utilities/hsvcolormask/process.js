@@ -122,6 +122,7 @@ function onEventChange() {
     cv2.bitwise_and(src, src, mask1)
 
     cv2.imshow('output', src)
+    cv2.waitKey(0)
     cv2.destroyAllWindows()
     `
   )

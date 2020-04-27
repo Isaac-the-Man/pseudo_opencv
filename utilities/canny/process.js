@@ -49,6 +49,7 @@ function onEventChange() {
     src = cv2.imread('image.jpg');
     edges = cv2.Canny(src, ${options.threshold1}, ${options.threshold2}, apertureSize=${options.apertureSize}, L2gradient=${options.L2gradient})
     cv2.imshow('output', edges)
+    cv2.waitKey(0)
     cv2.destroyAllWindows()
     `
   )

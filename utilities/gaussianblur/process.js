@@ -51,6 +51,7 @@ function onEventChange() {
     src = cv2.imread('image.jpg');
     blur = cv2.GaussianBlur(src, (${options.ksizex},${options.ksizey}), ${options.sigmax}, ${options.sigmay}, cv2.${options.border})
     cv2.imshow('output', blur)
+    cv2.waitKey(0)
     cv2.destroyAllWindows()
     `
   )

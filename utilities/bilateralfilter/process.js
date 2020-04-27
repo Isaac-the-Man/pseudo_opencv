@@ -47,6 +47,7 @@ function onEventChange() {
     src = cv2.imread('image.jpg');
     blur = cv2.bilateralFilter(src, ${options.d}, ${options.sigmaColor}, ${options.sigmaSpace}, cv2.${options.border})
     cv2.imshow('output', blur)
+    cv2.waitKey(0)
     cv2.destroyAllWindows()
     `
   )
