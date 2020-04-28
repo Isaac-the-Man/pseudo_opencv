@@ -94,7 +94,7 @@ function onEventChange() {
     flattened = np.float32(flattened)
 
     # k means clustering
-    ret, label, center = cv2.kmeans(flattened, ${options.k}
+    ret, label, center = cv2.kmeans(flattened, ${options.k}, None
       , (${modifyForPython(options.type)}, ${options.maxCount}, ${options.epsilon})
       , ${options.attempts}, cv2.${options.initial})
 
