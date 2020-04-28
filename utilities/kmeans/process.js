@@ -96,7 +96,7 @@ function onEventChange() {
     # k means clustering
     ret, label, center = cv2.kmeans(flattened, ${options.k}
       , (${modifyForPython(options.type)}, ${options.maxCount}, ${options.epsilon})
-      , ${options.attempts}, cv.${options.initial})
+      , ${options.attempts}, cv2.${options.initial})
 
     # convert back to unint8 and assemble image
     center = np.uint8(center)
