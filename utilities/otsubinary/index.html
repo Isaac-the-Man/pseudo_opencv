@@ -32,7 +32,7 @@
 
       <!-- Heading Text -->
       <div class="heading">
-        <h1>Simple Image Thresholding</h1>
+        <h1>Otsu's Binarization</h1>
         <p>state-of-the-art parameter tuning</p>
       </div>
 
@@ -56,24 +56,14 @@
       <!-- Parameters -->
       <h3 class="subtitle">Parameters</h3>
       <div class="tab">
-        <button class="tablinks" onclick="openTab(event, 'thresholds')" id="defaultOpen">Thresholds</button>
-        <button class="tablinks" onclick="openTab(event, 'aperturesize')">Type</button>
+        <button class="tablinks" onclick="openTab(event, 'aperturesize')" id="defaultOpen">Type</button>
       </div>
       <!-- Tab pages -->
-      <div id="thresholds" class="tabcontent">
-        <h3>Thresholds</h3>
-        <p>
-          The minimum and maximum thresholds of the image, resulting in a binary image of the given range.
-          Depending on the type of algorithm selected (see the 'type' tab), the maxium value may be unused.
-        </p>
-        <!-- toggle btns -->
-        <div id="r-slider"></div>
-      </div>
       <div id="aperturesize" class="tabcontent">
         <h3>Type</h3>
         <p>
-          Type of algorithm use to calculate the threshold. Check out the <a href="https://docs.opencv.org/3.4.0/d7/d4d/tutorial_py_thresholding.html" target="_blank">documentation</a>
-          for further information on each type. Speical algorithms such as <code>THRESH_OTSU</code> and <code>THRESH_TRIANGLE</code> are not included for simplicity.
+          Type of algorithm to use along with Otsu's algorithm to calculate the threshold. Check out the <a href="https://docs.opencv.org/3.4.0/d7/d4d/tutorial_py_thresholding.html" target="_blank">documentation</a>
+          for further information on each type.
         </p>
         <div id="radio"></div>
       </div>
@@ -86,6 +76,7 @@
       <div class="reference">
         <h3 class="subtitle">Reference</h3>
         <ul>
+          <li><a href="https://en.wikipedia.org/wiki/Otsu%27s_method" target="_blank">Otsu's Method</a></li>
           <li><a href="https://docs.opencv.org/3.4.0/d7/d1b/group__imgproc__misc.html#gae8a4a146d1ca78c626a53577199e9c57" target="_blank">cv2.threshold</a></li>
           <li><a href="https://docs.opencv.org/3.4.0/d7/d4d/tutorial_py_thresholding.html" target="_blank">Image Thresholding</a></li>
         </ul>
@@ -121,7 +112,7 @@
 
   </body>
   <script async src="opencv-3.4.js" type="text/javascript" onload="onOpenCVReady();"></script>
-  <script src="utilities/threshold/process.js" type="text/javascript"></script>
+  <script src="utilities/otsubinary/process.js" type="text/javascript"></script>
   <script src="clipboard.min.js"></script>
   <script src="preCode.js" type="text/javascript"></script>
   <script src="prism.js" type="text/javascript"></script>
@@ -133,7 +124,6 @@
   <script src="custom-slider.js" type="text/javascript"></script>
   <script src="gui.js" type="text/javascript"></script>
   <script type="text/javascript">
-    initRangeSlider('r-slider', 0, 255);
     initRadioGroup('radio', 'radio-type', [
       ['THRESH_BINARY', 'THRESH_BINARY'],
       ['THRESH_BINARY_INV', 'THRESH_BINARY_INV'],
